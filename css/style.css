@@ -18,3 +18,25 @@ body{
     background-color: white;
     color: #202945;
 }
+
+/* card hover  */
+.card{
+    
+    /* background-color: cadetblue; */
+    padding: 15px;
+    border-radius: 10px;
+    transition: 1s;  
+}
+.card:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.card>img{
+    transition: 0.5s;
+    
+}
+.card>img:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    padding-bottom: 20px;
+}
