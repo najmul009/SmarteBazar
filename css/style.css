@@ -19,6 +19,16 @@ body{
     color: #202945;
 }
 
+/* erroe btn  */
+.Warning{
+    display: none;
+    position: relative;
+}
+#closeWarning{
+    position: absolute;
+    right: 10px;
+}
+
 /* card hover  */
 .card{
     
