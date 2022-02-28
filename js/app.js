@@ -1,6 +1,13 @@
 //Search btn event handelaar function
 const searchPhone = () => {
-    fetch('https://openapi.programming-hero.com/api/phones?search=iphone')
+    const main = document.getElementById('main')
+    main.innerHTML=''
+    const searchValue = document.getElementById('search-field').value ;
+    const searchStr = searchValue.toString()
+    const searchText = searchStr.toLowerCase()
+    // console.log(searchText)
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+    fetch(url)
     .then(res => res.json())
     .then(data => displayPhones(data.data))
 }
