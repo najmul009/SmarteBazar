@@ -8,11 +8,13 @@ const error = (error, errorMsg) => {
 const closeError = () => {
     error('none')
 }
-// document.getElementById('closeWarning').addEventListener('click',function(){
-//     error('none')
-// };
+const spinner =(onOff)=>{
+    const spinner= document.getElementById('spinner')
+    spinner.style.display = onOff
+}
 //Search btn event handelaar function
 const searchPhone = () => {
+    spinner('block')
     const main = document.getElementById('main')
     const detailsContainer = document.getElementById('detailsContainer')
     detailsContainer.style.display = 'none'
@@ -24,6 +26,7 @@ const searchPhone = () => {
     // console.log(searchText)
     if (searchStr == '') {
         error('block', '!please search by your mobile name')
+        spinner('none')
     } else {
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
         fetch(url)
@@ -41,6 +44,7 @@ const displayPhones = (phones) => {
     // console.log(phones)
     if (phones.length === 0) {
         error('block', 'Result Not Found!')
+        spinner('none')
     } else {
         phones.forEach(phone => {
             // console.log(phone)
@@ -60,6 +64,7 @@ const displayPhones = (phones) => {
             main.appendChild(div)
         });
         error('none')
+        spinner('none')
     }
 
 }
@@ -67,6 +72,7 @@ const displayPhones = (phones) => {
 
 //function for sow details on UI
 const fetchDetails = (detailsId) => {
+    spinner('block')
     // console.log(detailsId)
     const url = `https://openapi.programming-hero.com/api/phone/${detailsId}`
     fetch(url)
@@ -163,5 +169,5 @@ const sowOthers = (item) => {
         tableBody.appendChild(tr)
     })
 
-    
+    spinner('none')
 }
