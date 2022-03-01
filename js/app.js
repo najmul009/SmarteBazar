@@ -15,6 +15,7 @@ const spinner = (onOff) => {
 }
 //fetch btn and get result
 const fetchSearch = (totalResult) => {
+    spinner('block')
     const searchValue = document.getElementById('search-field').value;
     const searchStr = searchValue.toString()
     const searchText = searchStr.toLowerCase()
@@ -37,7 +38,7 @@ const fetchSearch = (totalResult) => {
                 .then(res => res.json())
                 .then(data => returnData(data.data, totalResult))
 
-
+                
             error('none')
 
         }
@@ -49,6 +50,7 @@ const fetchSearch = (totalResult) => {
         fetch(url)
             .then(res => res.json())
             .then(data => returnData(data.data, totalResult))
+            
     }
 
 }
