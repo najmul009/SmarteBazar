@@ -55,6 +55,7 @@ body{
     padding: 15px;
     border-radius: 20px;
     background-color: white;
+    display: none;
 }
 td,th {
     border: 1px solid black;
@@ -63,4 +64,14 @@ td,th {
 }
 tr>td:nth-child(2) {
     padding-right: 100px;
-  }
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+@media screen and (max-width: 600px) {
+    tr>td:nth-child(2) {
+        padding-right: 10px;
+    }  
+}
