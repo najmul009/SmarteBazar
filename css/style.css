@@ -50,7 +50,7 @@ body{
     transform: scale(1.1);
     padding-bottom: 20px;
 }
-
+/* details styles */
 #detailsContainer{
     padding: 15px;
     border-radius: 20px;
@@ -70,6 +70,7 @@ a{
     color: white;
     font-weight: 600;
 }
+/* break point  */
 @media screen and (max-width: 600px) {
     tr>td:nth-child(2) {
         padding-right: 10px;
@@ -80,4 +81,9 @@ a{
     color: white;
     display: none;
     margin-top: 100px;
+}
+
+/* sow more  */
+#sowMore-btn{
+    display: none; 
 }

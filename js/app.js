@@ -8,42 +8,87 @@ const error = (error, errorMsg) => {
 const closeError = () => {
     error('none')
 }
-const spinner =(onOff)=>{
-    const spinner= document.getElementById('spinner')
+//spinner
+const spinner = (onOff) => {
+    const spinner = document.getElementById('spinner')
     spinner.style.display = onOff
 }
-//Search btn event handelaar function
-const searchPhone = () => {
-    spinner('block')
-    const main = document.getElementById('main')
-    const detailsContainer = document.getElementById('detailsContainer')
-    detailsContainer.style.display = 'none'
-    main.innerHTML = ''
+//fetch btn and get result
+const fetchSearch = (totalResult) => {
     const searchValue = document.getElementById('search-field').value;
     const searchStr = searchValue.toString()
     const searchText = searchStr.toLowerCase()
-    document.getElementById('search-field').value = ''
-    // console.log(searchText)
-    if (searchStr == '') {
-        error('block', '!please search by your mobile name')
-        spinner('none')
+    if (totalResult === 'searchPhone') {
+        spinner('block')
+        const main = document.getElementById('main')
+        const detailsContainer = document.getElementById('detailsContainer')
+        detailsContainer.style.display = 'none'
+        main.innerHTML = ''
+
+
+        // console.log(searchText)
+        if (searchStr == '') {
+            error('block', '!please search by your mobile name')
+            spinner('none')
+        } else {
+
+            const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
+            fetch(url)
+                .then(res => res.json())
+                .then(data => returnData(data.data, totalResult))
+
+
+            error('none')
+
+        }
+
     } else {
+        const main = document.getElementById('main')
+        main.innerHTML = ''
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
         fetch(url)
             .then(res => res.json())
-
-            .then(data => displayPhones(data.data))
-
-
-        error('none')
+            .then(data => returnData(data.data, totalResult))
     }
+
 }
 
+//condition function for sowAll
+const returnData = (result, sowResult) => {
+
+    if (result.length > 20) {
+        const seeMoreBtn = document.getElementById('sowMore-btn')
+        seeMoreBtn.style.display = 'block'
+        if (sowResult === 'searchPhone') {
+            displayPhones(result.slice(1, 21))
+        } else {
+            displayPhones(result)
+            seeMoreBtn.style.display = 'none'
+        }
+
+    } else {
+        document.getElementById('search-field').value = ''
+        displayPhones(result)
+    }
+
+
+}
+
+//search btn function
+const searchPhone = () => {
+    fetchSearch('searchPhone')
+
+}
+//sowall btn function
+const sowMore = () => {
+    fetchSearch('sowMore')
+}
 //function for fetch result desplay on UI 
 const displayPhones = (phones) => {
     // console.log(phones)
     if (phones.length === 0) {
         error('block', 'Result Not Found!')
+        document.getElementById('search-field').value = ''
         spinner('none')
     } else {
         phones.forEach(phone => {
@@ -131,7 +176,7 @@ const sowDetails = (item) => {
     sowOthers(item)
 }
 
-//sow sensore
+//sow sensore on details
 const sowSensors = (item) => {
     const sensors = item.mainFeatures.sensors
     const tableBody = document.getElementById('table-body')
@@ -148,7 +193,7 @@ const sowSensors = (item) => {
     });
 }
 
-//sow others
+//sow others on details
 const sowOthers = (item) => {
     const others = item.others
     const othersEntries = Object.entries(others)
@@ -156,13 +201,13 @@ const sowOthers = (item) => {
     const tableBody = document.getElementById('table-body')
     const th = document.createElement('th')
     th.classList.add('bg-secondary')
-    th.setAttribute('colspan','2')
-    th.innerHTML=`<h4 class="text-center text-light ">Others</h4>`
+    th.setAttribute('colspan', '2')
+    th.innerHTML = `<h4 class="text-center text-light ">Others</h4>`
     tableBody.appendChild(th)
-    othersEntries.forEach(othersArr =>{
+    othersEntries.forEach(othersArr => {
         // console.log(othersArr[0],othersArr[1])
         const tr = document.createElement('tr')
-        tr.innerHTML=`
+        tr.innerHTML = `
         <td> <strong>${othersArr[0]}</strong></td>
         <td>${othersArr[1]}</td>
         `;
