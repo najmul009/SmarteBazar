@@ -35,13 +35,13 @@ const searchPhone = () => {
 }
 //function for fetch result desplay on UI 
 const displayPhones = (phones) => {
-    console.log(phones)
+    // console.log(phones)
     if(phones.length === 0 ){
         error('block', 'Result Not Found!')
     }
     else{
         phones.forEach(phone => {
-            console.log(phone)
+            // console.log(phone)
             const main = document.getElementById('main')
             const div = document.createElement('div')
             div.classList.add('col-12', 'col-md-6', 'col-lg-4', 'p-2')

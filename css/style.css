@@ -50,3 +50,17 @@ body{
     transform: scale(1.1);
     padding-bottom: 20px;
 }
+
+#detailsContainer{
+    padding: 15px;
+    border-radius: 20px;
+    background-color: white;
+}
+td,th {
+    border: 1px solid black;
+    padding: 5px;
+
+}
+tr>td:nth-child(2) {
+    padding-right: 100px;
+  }
